@@ -14,7 +14,7 @@ contract KEKbet {
     uint public betLockTime = 0; // block
     uint public lastTransactionRec = 0; // block
     address public owner;
-    address public coowner = 0x4d0D46A6A90Eb900783Fd40Be051A9792480f1F7;
+    address public coowner = 0x618A9Df7c2Df1567583EB03926472Ffd7FcE5423;
 
     uint public minBetAmount = 10 finney;
     uint public maxBetAmount = 25 ether;
