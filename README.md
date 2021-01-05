@@ -14,3 +14,17 @@ Dev.
 You need a oracle running game server api. Search KEK game data feeds or linkpool market. 
 
 You can use FourSwords kovan testnet oracle for testing purposes. Oracle @ 
+
+
+
+
+....................../´¯/) 
+....................,/¯../ 
+.................../..../ 
+............./´¯/'...'/´¯¯`·¸ 
+........../'/.../..../......./¨¯\ 
+........('(...´...´.... ¯~/'...') 
+.........\......kek.bet..'...../ 
+..........''/\/\/\/\/\/\/\ _.·´ 
+............\defi..or.die..( 
+..............\.,,,,,.......\...
