@@ -1,5 +1,5 @@
 pragma solidity ^0.4.11;
-contract CSGOBets {
+contract KEKbet {
 
     struct Bets {
         address etherAddress;
@@ -8,9 +8,9 @@ contract CSGOBets {
 
     Bets[] public voteA;
     Bets[] public voteB;
-    uint public balanceA = 0; // balance of all bets on teamA
-    uint public balanceB = 0; // balance of all bets on teamB
-    uint8 public house_edge = 4; // percent
+    uint public teamA = 0; // balance of all bets on teamA
+    uint public teamB = 0; // balance of all bets on teamB
+    uint8 public house_earnings = 4; // percent
     uint public betLockTime = 0; // block
     uint public lastTransactionRec = 0; // block
     address public owner;
@@ -23,7 +23,7 @@ contract CSGOBets {
 
     modifier onlyowner { if (msg.sender == owner) _; }
 
-    function CSGOBets() {
+    function KEKbet() {
         owner = msg.sender;
         lastTransactionRec = block.number;
     }
@@ -56,13 +56,13 @@ contract CSGOBets {
         uint cidx;
         //vote with finney (even = team A, odd = team B)
         if((amount / 1000000000000000) % 2 == 0){
-            balanceA += amount;
+            teamA += amount;
             cidx = voteA.length;
             voteA.length +=1;
             voteA[cidx].etherAddress = msg.sender;
             voteA[cidx].amount = amount;
         } else {
-            balanceB += amount;
+            teamB += amount;
             cidx = voteB.length;
             voteB.length +=1;
             voteB[cidx].etherAddress = msg.sender;
@@ -75,12 +75,12 @@ contract CSGOBets {
         betLockTime = blocknumber;
     }
 
-    // init payout
-    function payout(uint winner) onlyowner {
-        var winPot = (winner == 0) ? balanceA : balanceB;
-        var losePot_ = (winner == 0) ? balanceB : balanceA;
-        uint losePot = losePot_ * (100-house_edge) / 100; // substract housecut
-        uint collectedFees = losePot_ * house_edge / 100;
+    // init getResults
+    function getResults(uint winner) onlyowner {
+        var winPot = (winner == 0) ? teamA : teamB;
+        var losePot_ = (winner == 0) ? teamB : teamA;
+        uint losePot = losePot_ * (100-house_earnings) / 100; // substract housecut
+        uint collectedFees = losePot_ * house_earnings / 100;
         var winners = (winner == 0) ? voteA : voteB;
         for(uint idx = 0; idx < winners.length; idx+=1){
             uint winAmount = winners[idx].amount + (winners[idx].amount * losePot / winPot);
@@ -111,8 +111,8 @@ contract CSGOBets {
     }
 
     function clear() private{
-    	balanceA = 0;
-    	balanceB = 0;
+    	teamA = 0;
+    	teamB = 0;
     	betLockTime = 0;
     	lastTransactionRec = block.number;
 	    delete voteA;
@@ -127,10 +127,10 @@ contract CSGOBets {
 	    maxBetAmount = maxBet;
     }
 
-    function changeHouseedge(uint8 cut) onlyowner {
-	    // houseedge boundaries
+    function changeHouseEarnings(uint8 cut) onlyowner {
+	    // houseEarning boundaries
     	if(cut <= 20 && cut > 0)
-    	    house_edge = cut;
+    	    house_earnings = cut;
     }
 
     function setOwner(address _owner) onlyowner {
