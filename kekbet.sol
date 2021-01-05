@@ -1,6 +1,15 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.24;
+
+import "https://github.com/smartcontractkit/chainlink/blob/develop/evm-contracts/src/v0.4/ChainlinkClient.sol";
+
 contract KEKbet {
 
+ constructor() public {
+        setPublicChainlinkToken();
+        oracle = 0xA42FdFD2E1a7239B76D753803cbB7611004FE068; // oracle address
+        jobId = "6e5ea740bca64bf596288cef75707f51"; //job id
+        fee = 0.1 * 10 ** 18; // 0.1 LINK
+    }
     struct Bets {
         address etherAddress;
         uint amount;
@@ -23,7 +32,7 @@ contract KEKbet {
 
     modifier onlyowner { if (msg.sender == owner) _; }
 
-    function KEKbet() {
+    function KEKbets() {
         owner = msg.sender;
         lastTransactionRec = block.number;
     }
@@ -33,7 +42,7 @@ contract KEKbet {
         // If bet is locked for more than 28 days allow users to return all the money
         if (msg.value < minBetAmount ||
                         (block.number >= betLockTime && betLockTime != 0 && block.number < betLockTime + monthBlockCount)) {
-            throw;
+            require();
         }
 
         uint amount;
@@ -74,9 +83,17 @@ contract KEKbet {
     function lockBet(uint blocknumber) onlyowner{
         betLockTime = blocknumber;
     }
-
-    // init getResults
-    function getResults(uint winner) onlyowner {
+    
+ function getResults() public {
+        Chainlink.Request memory req = buildChainlinkRequest(jobId, address(this), this.fulfillResults.selector);
+        sendChainlinkRequestTo(oracle, req, fee);
+    }
+      function fulfillResults(bytes32 _requestId, uint256 _finalScore) public recordChainlinkFulfillment(_requestId) {
+        getResults = _finalScore;
+    }
+    
+    // init Finalize
+    function Finalize(uint winner) onlyowner {
         var winPot = (winner == 0) ? teamA : teamB;
         var losePot_ = (winner == 0) ? teamB : teamA;
         uint losePot = losePot_ * (100-house_earnings) / 100; // substract housecut
@@ -87,6 +104,7 @@ contract KEKbet {
             if(! winners[idx].etherAddress.send(winAmount)){ // If not successfull (invalid address) add to fee pool
                 collectedFees += winAmount;
             }
+            
         }
     
         // pay housecut & reset for next bet
@@ -138,3 +156,5 @@ contract KEKbet {
     }
 
 }
+
+  
