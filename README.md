@@ -20,29 +20,16 @@ You can use FourSwords kovan testnet oracle for testing purposes. Oracle @
 
 
 
-                                                      
-                                                      
-kkkkkkkk                           kkkkkkkk           
-k::::::k                           k::::::k           
-k::::::k                           k::::::k           
-k::::::k                           k::::::k           
- k:::::k    kkkkkkk eeeeeeeeeeee    k:::::k    kkkkkkk
- k:::::k   k:::::kee::::::::::::ee  k:::::k   k:::::k 
- k:::::k  k:::::ke::::::eeeee:::::eek:::::k  k:::::k  
- k:::::k k:::::ke::::::e     e:::::ek:::::k k:::::k   
- k::::::k:::::k e:::::::eeeee::::::ek::::::k:::::k    
- k:::::::::::k  e:::::::::::::::::e k:::::::::::k     
- k:::::::::::k  e::::::eeeeeeeeeee  k:::::::::::k     
- k::::::k:::::k e:::::::e           k::::::k:::::k    
-k::::::k k:::::ke::::::::e         k::::::k k:::::k   
-k::::::k  k:::::ke::::::::eeeeeeee k::::::k  k:::::k  
-k::::::k   k:::::kee:::::::::::::e k::::::k   k:::::k 
-kkkkkkkk    kkkkkkk eeeeeeeeeeeeee kkkkkkkk    kkkkkkk
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      
+
+$$\                 $$\       
+$$ |                $$ |      
+$$ |  $$\  $$$$$$\  $$ |  $$\ 
+$$ | $$  |$$  __$$\ $$ | $$  |
+$$$$$$  / $$$$$$$$ |$$$$$$  / 
+$$  _$$<  $$   ____|$$  _$$<  
+$$ | \$$\ \$$$$$$$\ $$ | \$$\ 
+\__|  \__| \_______|\__|  \__|
+                              
+                              
+                              
 
